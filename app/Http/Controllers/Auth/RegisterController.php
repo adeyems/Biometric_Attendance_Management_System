@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Student;
+use App\StudentParent;
+use App\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegisterController extends Controller
 {
@@ -69,4 +72,43 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function student() {
+
+        $teachersNames = Teacher::getTeachersName();
+
+        return view('auth.register.student')->with('teachersNames', $teachersNames);
+    }
+
+    public function studentParent() {
+        return view('auth.register.parent');
+    }
+
+    public function createStudent(Request $request) {
+
+
+         if (Student::create($request)) {
+             $request->session()->flash('status', 'Your account was created successfully!');
+             return redirect('/login/student');
+         }
+
+         else{
+             $teachersNames = Teacher::getTeachersName();
+
+             return view('auth.register.student')->with('teachersNames', $teachersNames)->with('error',  "Sorry, An error occurred");
+         }
+    }
+
+    public function createParent(Request $request) {
+
+        if (StudentParent::create($request)) {
+            $request->session()->flash('status', 'Your account was created successfully!');
+            return redirect('/login/parent');
+        }
+
+        else{
+            return view('auth.register.student')->with('error',  "Sorry, An error occurred");
+        }
+    }
+
 }
