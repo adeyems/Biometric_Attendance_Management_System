@@ -11,22 +11,8 @@
                         <form method="POST" action="{{ route('createParent') }}">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="student_no" class="col-md-4 col-form-label text-md-right">{{ __('Student No') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="class" type="number" class="form-control @error('class') is-invalid @enderror" name="student_no" value="{{ old('student_no') }}" required autocomplete="class" autofocus>
-
-                                    @error('student_no')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             <div class="form-group row" id="signup-form">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Parent Name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -40,7 +26,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
+                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Parent Surname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -52,6 +38,21 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group row" id="signup-form">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Student Name') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
                             <div class="form-group row">
                                 <label for="mobile_no" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number') }}</label>

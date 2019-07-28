@@ -34,14 +34,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="/"> <img src="{{ asset('images/queen _ede .jpg') }}" style="max-width: 150px; max-height: 100px" alt="Queen Ede Secondary School"></a>
+                            <a href="/"> <img src="{{ asset('images/logo.jpg') }}" style="max-width: 150px; max-height: 100px" alt="Logo"></a>
                         </li>
                         {{--<li class="nav-item">--}}
                             {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
                         {{--</li>--}}
                     </ul>
                         <div class="col-md-8 title m-b-md">
-                            Secured Guidance, Counselling and Monitoring Web Application
+                           ONLINE STUDENT MONITORING SYSTEM USING FINGERPRINT SCANNER
                         </div>
                     <!-- Right Side Of Navbar -->
                     @if(session()->has('user'))
