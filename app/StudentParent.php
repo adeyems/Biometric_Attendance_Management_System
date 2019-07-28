@@ -20,7 +20,7 @@ class StudentParent extends Model
     protected $primaryKey = 'parent_no';
 
     protected $fillable = [
-        'password', 'name', 'surname', 'email', 'password', 'mobile_no', 'address', 'student_no',
+        'password', 'name', 'surname', 'username', 'password', 'mobile_no', 'address', 'student_no',
     ];
 
     /**
@@ -51,7 +51,7 @@ class StudentParent extends Model
         $parent = new StudentParent();
 
         $parent->name = $request->name;
-        $parent->email = $request->email;
+        $parent->email = $request->username;
         $parent->surname = $request->surname;
         $parent->mobile_no = $request->mobile_no;
         $parent->address = $request->address;
