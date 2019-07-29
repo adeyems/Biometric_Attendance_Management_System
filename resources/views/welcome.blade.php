@@ -15,9 +15,11 @@
                 text-transform: uppercase;">
             <div class="col-md-12">
                 <div class="title text-center m-b-md" style="padding-bottom: 80px"><h5>Login Screen</h5></div>
-                <div class="links title m-b-md offset-4 align-content-center">
-                    <a href="{{ route('login.parent') }}" class="btn btn-primary" style="margin-right: 130px;">Parent</a>
-                    <a href="{{ url('/login/teacher') }}" class="btn btn-primary" style="margin-right: 30px;">Teacher</a>
+                <div class="links title m-b-md text-center" style="padding-bottom: 50px">
+                    <a href="{{ route('login.parent') }}" class="btn btn-primary">Parent</a>
+                </div>
+                <div class="links title m-b-md text-center">
+                 <a href="{{ url('/login/teacher') }}" class="btn btn-primary">Teacher</a>
                 </div>
             </div>
         </div>
