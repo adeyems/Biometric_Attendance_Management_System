@@ -70,7 +70,7 @@
                                 <label for="mobile_no" class="col-md-4 col-form-label text-md-right">{{ __('Mobile No') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile-no" type="tel" class="form-control @error('mobile_no') is-invalid @enderror" minlength="10" maxlength="10" name="mobile_no" placeholder="+353" value="{{ old('email') }}" required autocomplete="mobile-no">
+                                    <input id="mobile-no" type="tel" class="form-control @error('mobile_no') is-invalid @enderror" minlength="10" maxlength="13" name="mobile_no" placeholder="+353" value="{{ old('email') }}" required autocomplete="mobile-no">
 
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
