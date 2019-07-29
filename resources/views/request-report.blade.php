@@ -55,7 +55,7 @@
                                 <label for="startdate" class="col-md-4 col-form-label text-md-right">{{ __('Start Date') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="startdate" type="date" max="{{ date('Y-m-d') }}" class="form-control @error('mobile_no') is-invalid @enderror" name="start_date" value="{{ old('email') }}" required autocomplete="mobile-no">
+                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="start_date" value="{{ old('email') }}" required autocomplete="mobile-no">
 
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                 <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __('End Date ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="enddate" type="date" max="{{ date('Y-m-d') }}" class="form-control @error('mobile_no') is-invalid @enderror" name="end_date" value="{{ old('email') }}" required autocomplete="mobile-no">
+                                    <input id="enddate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="end_date" value="{{ old('email') }}" required autocomplete="mobile-no">
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
