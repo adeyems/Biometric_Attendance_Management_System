@@ -17,7 +17,7 @@ class CreateTeachersTable extends Migration
             $table->tinyIncrements('teacher_no');
             $table->string('teacher_name');
             $table->string('teacher_surname');
-            $table->mediumText('class');
+            $table->string('class');
             $table->string('subject');
             $table->string('mobile_no');
             $table->string('username');

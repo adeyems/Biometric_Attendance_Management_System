@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class RegisterController extends Controller
 {
@@ -102,12 +103,12 @@ class RegisterController extends Controller
     public function createParent(Request $request) {
 
         if (StudentParent::create($request)) {
-            $request->session()->flash('status', 'Your account was created successfully!');
+            $request->session()->flash('status', 'Account created successful!');
             return redirect('/login/parent');
         }
 
         else{
-            return view('auth.register.student')->with('error',  "Sorry, An error occurred");
+            return view('auth.register.parent')->with('error',  "Sorry, An error occurred");
         }
     }
 

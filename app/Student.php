@@ -63,4 +63,8 @@ class Student extends Model
        return $student->save();
 
     }
+
+    public static function studentExists(string $studentNo) {
+        return Student::where('student_no', $studentNo)->first();
+    }
 }

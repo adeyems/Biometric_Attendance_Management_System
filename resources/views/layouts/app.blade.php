@@ -40,13 +40,16 @@
                             {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
                         {{--</li>--}}
                     </ul>
-                        <div class="col-md-8 title m-b-md">
+                        <div class="col-md-10" style="font-size: medium">
                            ONLINE STUDENT MONITORING SYSTEM USING FINGERPRINT SCANNER
                         </div>
                     <!-- Right Side Of Navbar -->
                     @if(session()->has('user'))
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a> <img src="{{ asset('images/user-alt.png') }}" style="max-width: 32px; max-height: 32px"></a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
                             </li>

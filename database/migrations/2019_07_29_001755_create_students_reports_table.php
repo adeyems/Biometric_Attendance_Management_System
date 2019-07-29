@@ -19,8 +19,8 @@ class CreateStudentsReportsTable extends Migration
              $table->foreign('student_no')->references('student_no')->on('students_biometrics');
              $table->unsignedTinyInteger('parent_no');
             $table->foreign('parent_no')->references('parent_no')->on('students_parents');
-            $table->date('date');
-            $table->time('time');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

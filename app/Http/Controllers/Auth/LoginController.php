@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Counsellor;
 use App\Http\Controllers\Controller;
-use App\Student;
 use App\StudentParent;
 use App\Teacher;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
@@ -47,10 +46,6 @@ class LoginController extends Controller
         }
     }
 
-    public function student()
-    {
-        return view('auth.login')->with('user', 'Student')->with('login', 'studentLogin')->with('register', 'studentRegister');
-    }
 
     public function parent()
     {
@@ -62,11 +57,6 @@ class LoginController extends Controller
         return view('auth.login')->with('user', 'Teacher')->with('login', 'teacherLogin');
     }
 
-    public function counsellor()
-    {
-        return view('auth.login')->with('user', 'Guidance and Counsellor')->with('login', 'counsellorLogin');
-    }
-
     public function teacherLogin(Request $request)
     {
         $teacher = Teacher::login($request);
@@ -74,26 +64,17 @@ class LoginController extends Controller
         if ($teacher){
             session()->push('user', $teacher);
             session()->push('role', 'Teacher');
+            $request->session()->flash('status', 'Login successful!');
             return redirect('/home');
         }
 
         return view('auth.login', ['error' => 'Login unsuccessful. Check your login credential', 'user' => 'Teacher', 'login' => 'teacherLogin', 'register' => 'teacherRegister']);
     }
 
-    public function studentLogin(Request $request)
-    {
-        $student = Student::login($request);
-
-        if ($student){
-            session()->push('user', $student);
-            session()->push('role', 'Student');
-            return redirect('/home');
-        }
-
-        return view('auth.login', ['error' => 'Login unsuccessful. Check your login credential', 'user' => 'Student', 'login' => 'studentLogin', 'register' => 'studentRegister']);
-
-    }
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function parentLogin(Request $request)
     {
         $parent = StudentParent::login($request);
@@ -101,25 +82,11 @@ class LoginController extends Controller
         if ($parent){
             session()->push('user', $parent);
             session()->push('role', 'Parent');
+            $request->session()->flash('status', 'Login successful!');
             return redirect('/home');
         }
 
         return view('auth.login', ['error' => 'Login unsuccessful. Check your login credential', 'user' => 'Parent', 'login' => 'parentLogin', 'register' => 'parentRegister']);
-
-    }
-
-    public function counsellorLogin(Request $request)
-    {
-        $counsellor = Counsellor::login($request);
-
-        if ($counsellor){
-            session()->push('user', $counsellor);
-            session()->push('role', 'Counsellor');
-            return redirect('/home');
-        }
-
-        return view('auth.login', ['error' => 'Login unsuccessful. Check your login credential', 'user' => 'Counsellor', 'login' => 'counsellorLogin', 'register' => 'counsellorRegister']);
-
 
     }
 

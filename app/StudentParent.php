@@ -16,11 +16,11 @@ class StudentParent extends Model
      * @var array
      */
 
-    protected $table = 'students_parent';
+    protected $table = 'students_parents';
     protected $primaryKey = 'parent_no';
 
     protected $fillable = [
-        'password', 'name', 'surname', 'username', 'password', 'mobile_no', 'address', 'student_no',
+        'password', 'parent_name', 'parent_surname', 'username', 'password', 'mobile_no', 'home_address', 'student_no',
     ];
 
     /**
@@ -43,23 +43,37 @@ class StudentParent extends Model
 
     public static function login(Request $request) {
 
-        return Teacher::where('email', $request->get('email'))->where('password', sha1($request->get('password')))->first();
+        return StudentParent::where('username', $request->get('username'))->where('password', sha1($request->get('password')))->first();
 
     }
 
     public static function create(Request $request){
         $parent = new StudentParent();
 
-        $parent->name = $request->name;
-        $parent->email = $request->username;
-        $parent->surname = $request->surname;
+        $parent->parent_name = $request->name;
+        $parent->username = $request->username;
+        $parent->parent_surname = $request->surname;
         $parent->mobile_no = $request->mobile_no;
-        $parent->address = $request->address;
+        $parent->home_address = $request->address;
         $parent->password = sha1($request->password);
+        $parent->username = ($request->username);
         $parent->student_no =  $request->student_no;
 
         return $parent->save();
 
     }
+
+    public static function usernameExists(string $username) {
+        return StudentParent::where('username', $username)->first();
+    }
+
+    public static function studentExists(string $studentNo) {
+        return !StudentParent::where('student_no', $studentNo)->first();
+    }
+
+    public static function emailExists(string $email) {
+        return StudentParent::where('username', $email)->first();
+    }
+
 
 }
