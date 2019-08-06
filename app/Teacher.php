@@ -23,7 +23,7 @@ class Teacher extends Model {
 
     public static function login(Request $request) {
 
-        return Teacher::where('username', $request->get('username'))->where('password', sha1($request->get('password')))->first();
+        return self::where('username', $request->get('username'))->where('password', sha1($request->get('password')))->first();
 
     }
 

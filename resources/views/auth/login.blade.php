@@ -50,7 +50,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" checked type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
@@ -73,7 +73,7 @@
                                     </a><br><br>
                                 @endif
 
-                                @if( $user === 'Student' || $user === 'Parent')
+                                @if( $user === 'Parent')
                                     First Time User?
                                     <a class="btn btn-sm btn-secondary" href="{{ route($register) }}">
                                         {{ __('Click here?') }}

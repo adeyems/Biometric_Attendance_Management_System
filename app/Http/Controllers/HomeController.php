@@ -1,51 +1,27 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: abdulqudus
+ * Date: 8/5/19
+ * Time: 6:41 PM
+ */
 
 namespace App\Http\Controllers;
 
-use App\RequestReport;
-use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController
 {
-    /**
-     * Create a new controller instance.
-     *
-     *
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
 
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        if (!session()->has('user')) {
-            return redirect('/');
+        if (session()->has('user')){
+            $user = session()->get('role');
+            if ($user[0] == 'Parent')
+                return redirect('/parent/home');
+
+            return redirect('/teacher/home');
         }
 
-        return view('parent-home');
-    }
-
-    public function requestReport(){
-
-        return view('request-report');
-    }
-
-    public function submitRequestReport(Request $request){
-
-        if (RequestReport::create($request)) {
-            $request->session()->flash('status', 'Your report was submitted successfully!');
-            return redirect('/home');
-        }
-
-        else{
-            return view('request-report')->with('error',  "Sorry, An error occurred");
-        }
+        return view('welcome');
     }
 }

@@ -18,11 +18,8 @@
                     @endif
                     @if ( session()->get('role')[0] == 'Parent')
                         <div class="col-md-12">
-                            <div class="links title m-b-md text-center" style="padding-bottom: 50px">
-                                <a href="{{ route('request-report') }}" class="btn btn-primary">Request Student Report</a>
-                            </div>
                             <div class="links title m-b-md text-center">
-                                <a href="#" class="btn btn-primary">View Notification</a>
+                                <a href="{{ route('request-report') }}" class="btn btn-primary">Request Student Report</a>
                             </div>
                         </div>
                     @endif

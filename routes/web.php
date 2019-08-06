@@ -11,16 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    if (session()->has('user')) {
-        return redirect('home');
-    }
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('parent-home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/parent/home', 'ParentController@index')->name('parent-home');
+
+
+Route::get('/teacher/home', 'TeacherController@index')->name('teacher-home');
 
 //Login Page Routes
 Route::get('/login/parent', 'Auth\LoginController@parent')->name('login.parent');
@@ -41,10 +38,16 @@ Route::post('/register/createParent', 'Auth\RegisterController@createParent')->n
 Route::get('/logout', 'Auth\LogoutController@index')->name('logout');
 
 //report
-Route::get('/request-report', 'HomeController@requestReport')->name('request-report');
+Route::get('/request-report', 'ParentController@requestReport')->name('request-report');
 
 //report
-Route::post('/request-report', 'HomeController@submitRequestReport')->name('create-request-report');
+Route::post('/request-report', 'ParentController@submitRequestReport')->name('create-request-report');
 
 //report
 Route::post('/password-reset', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('reset.password');
+
+Route::get('/student/attendance', 'StudentController@attendance')->name('student-daily-attendance');
+
+
+Route::get('/student/attendance/report', 'StudentController@attendanceReport')->name('student-attendance-report');
+

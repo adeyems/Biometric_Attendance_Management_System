@@ -15,7 +15,7 @@ class Student extends Model
      *
      * @var array
      */
-    protected $table = 'students';
+    protected $table = 'students_biometrics';
     protected $primaryKey = 'student_no';
 
     protected $fillable = [
@@ -67,4 +67,9 @@ class Student extends Model
     public static function studentExists(string $studentNo) {
         return Student::where('student_no', $studentNo)->first();
     }
+
+    public static function getNameAndNumber(){
+        return self::select('student_no', 'student_name', 'student_surname')->get();
+    }
+
 }
