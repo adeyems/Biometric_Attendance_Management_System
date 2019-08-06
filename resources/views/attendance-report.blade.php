@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">{{ __('Student Daily Attendance') }}</div>
+                    <div class="card-header text-center">{{ __('Student Attendance Report') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('create-request-report') }}">
