@@ -14,7 +14,8 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "mailgun/mailgun-php": "^2.8",
-        "php-http/message": "^1.7"
+        "php-http/message": "^1.7",
+        "twilio/sdk": "^5.34"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

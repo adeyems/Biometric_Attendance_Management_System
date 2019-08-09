@@ -45,6 +45,15 @@
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Time</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Next Date</th>
+                                    <th scope="col">Next Date</th>
+                                    <th scope="col">End Date</th>
+                                </tr>
+                                </thead>
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col"></th>
                                     <th scope="col">{{ date('Y-m-d', strtotime('-4 day')) }}</th>
                                     <th scope="col">{{ date('Y-m-d', strtotime('-3 day')) }}</th>
                                     <th scope="col">{{ date('Y-m-d', strtotime('-2 day')) }}</th>

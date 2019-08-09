@@ -51,3 +51,4 @@ Route::get('/student/attendance', 'StudentController@attendance')->name('student
 
 Route::get('/student/attendance/report', 'StudentController@attendanceReport')->name('student-attendance-report');
 
+Route::get('/sms', 'SMSController@sendSMS');
