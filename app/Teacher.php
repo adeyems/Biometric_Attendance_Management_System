@@ -33,5 +33,8 @@ class Teacher extends Model {
 
     }
 
+    public static final function getAllTeachers() {
+        return Teacher::all();
+    }
 
 }

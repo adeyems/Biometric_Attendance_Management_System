@@ -14,7 +14,7 @@ class CreateStudentsReportsTable extends Migration
     public function up()
     {
         Schema::create('students_reports', function (Blueprint $table) {
-            $table->bigIncrements('report_no');
+            $table->string('report_no')->unique();
              $table->string('student_no');
              $table->foreign('student_no')->references('student_no')->on('students_biometrics');
              $table->unsignedTinyInteger('parent_no');

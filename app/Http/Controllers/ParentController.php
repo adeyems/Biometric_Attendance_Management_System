@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\RequestReport;
+use App\StudentParent;
+use App\Teacher;
 use Illuminate\Http\Request;
 
 class ParentController extends Controller
@@ -25,16 +27,25 @@ class ParentController extends Controller
      */
     public function index()
     {
-        if (!session()->has('user')) {
+        $role = session()->get('role')[0];
+
+        if ( $role != 'Parent') {
             return redirect('/');
         }
 
         return view('parent-home');
     }
 
-    public function requestReport(){
+    public function requestReport() {
+        $role = session()->get('role')[0];
 
-        return view('request-report');
+        if ( $role != 'Parent') {
+            return redirect('/');
+        }
+        $parent = StudentParent::findByEmail(session()->get('user')[0]["username"]);
+        return view('request-report')->with("report_no", "RN" . time())
+            ->with('parent', $parent)
+            ->with('teachers', Teacher::getAllTeachers());
     }
 
     public function submitRequestReport(Request $request){

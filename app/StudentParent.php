@@ -75,5 +75,7 @@ class StudentParent extends Model
         return StudentParent::where('username', $email)->first();
     }
 
-
+    public static function findByEmail(string $email) {
+        return StudentParent::where('username', $email)->first();
+    }
 }

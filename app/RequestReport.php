@@ -23,9 +23,10 @@ class RequestReport extends Model {
         'report_no', 'student_no', 'start_date', 'end_date',
     ];
 
-    public static function create(Request $request){
+    public static function create(Request $request) {
+    public static function create(Request $request) {
         $report = new RequestReport();
-
+        $report->report_no = $request->report_no;
         $report->start_date = $request->start_date;
         $report->end_date = $request->end_date;
         $report->parent_no = session()->get('user')[0]->parent_no;
@@ -36,4 +37,3 @@ class RequestReport extends Model {
     }
 
 }
-

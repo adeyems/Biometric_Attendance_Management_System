@@ -10,12 +10,25 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('create-request-report') }}">
                             @csrf
+                            <input type="hidden" value="{{$report_no}}" name="report_no" >
+                            <div class="form-group row" id="signup-form">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Report Number') }}</label>
 
+                                <div class="col-md-6">
+                                    <Label>{{$report_no}}</Label>
+
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row" id="signup-form">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Parent Name and Surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value='{{ $parent["parent_surname"] }} {{ $parent["parent_name"] }}' readonly required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +42,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Student No') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="student_no" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="student_no" value='{{ $parent["student_no"] }}' readonly required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -39,10 +52,10 @@
                                 </div>
                             </div>
                             <div class="form-group row" id="signup-form">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Class teacher UserName') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Class Teacher Name and Surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <select id="name"  class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
