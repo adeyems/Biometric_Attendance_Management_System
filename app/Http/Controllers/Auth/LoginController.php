@@ -65,7 +65,7 @@ class LoginController extends Controller
             return redirect('/teacher/home');
         }
 
-        return view('auth.login')->with('user', 'Teacher')->with('login', 'teacherLogin');
+        return view('auth.login')->with('user', 'Teacher')->with('login', 'teacherLogin')->with('register', 'teacherRegister');
     }
 
     public function teacherLogin(Request $request)

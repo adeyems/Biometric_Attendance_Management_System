@@ -85,6 +85,10 @@ class RegisterController extends Controller
         return view('auth.register.parent');
     }
 
+    public function teacher() {
+        return view('auth.register.teacher');
+    }
+
     public function createStudent(Request $request) {
 
 
@@ -102,6 +106,10 @@ class RegisterController extends Controller
 
     public function createParent(Request $request) {
 
+        if ($request->password != $request->password_confirmation){
+            return back()->with('error',  "Password and the Re-typed Password do no match");
+        }
+
         if (StudentParent::create($request)) {
             $request->session()->flash('status', 'Account created successful!');
             return redirect('/login/parent');
@@ -109,6 +117,25 @@ class RegisterController extends Controller
 
         else{
             return view('auth.register.parent')->with('error',  "Sorry, An error occurred");
+        }
+    }
+
+    public function createTeacher(Request $request) {
+
+        if ($request->password != $request->password_confirmation){
+            return back()->with('error',  "Password and the Re-typed Password do no match");
+        }
+         if (!Teacher::getTeacherByNo($request->teacher_no)){
+             return back()->with('error',  "No Teacher Number Found.");
+         }
+
+        if (Teacher::create($request)) {
+            $request->session()->flash('status', 'Account created successful!');
+            return redirect('/login/teacher');
+        }
+
+        else{
+            return back()->with('error',  "Sorry, An error occurred");
         }
     }
 

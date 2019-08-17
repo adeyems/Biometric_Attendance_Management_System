@@ -15,10 +15,12 @@ class Teacher extends Model {
      * @var array
      */
     protected $table = 'teachers';
-    protected $primaryKey = 'employment_no';
+    protected $primaryKey = 'teacher_no';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
-        'password', 'username',
+        'teacher_no', 'password', 'teacher_name', 'teacher_surname', 'class', 'subject', 'username', 'mobile_no',
     ];
 
     public static function login(Request $request) {
@@ -37,4 +39,27 @@ class Teacher extends Model {
         return Teacher::all();
     }
 
+    public static function getTeacherByNo(string $no) {
+        return self::where('teacher_no', $no)->first();
+    }
+
+    public static function getNameById(int $teacher_no) {
+        return self::select('teacher_name', 'teacher_surname')->where('teacher_no', $teacher_no)->first();
+    }
+
+    public static function create(Request $request){
+        $teacher = self::find($request->teacher_no);
+
+        $teacher->teacher_name = $request->name;
+        $teacher->username = $request->username;
+        $teacher->teacher_surname = $request->surname;
+        $teacher->mobile_no = $request->mobile_no;
+        $teacher->class = $request->class;
+        $teacher->subject = $request->subject;
+        $teacher->password = sha1($request->password);
+        $teacher->username = ($request->username);
+
+        return $teacher->save();
+
+    }
 }

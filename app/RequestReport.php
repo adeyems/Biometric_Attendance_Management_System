@@ -18,12 +18,13 @@ class RequestReport extends Model {
 
     protected $table = 'students_reports';
     protected $primaryKey = 'report_no';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $fillable = [
         'report_no', 'student_no', 'start_date', 'end_date',
     ];
 
-    public static function create(Request $request) {
     public static function create(Request $request) {
         $report = new RequestReport();
         $report->report_no = $request->report_no;

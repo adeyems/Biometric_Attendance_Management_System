@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RequestReport;
+use App\Student;
 use App\StudentParent;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -43,20 +44,21 @@ class ParentController extends Controller
             return redirect('/');
         }
         $parent = StudentParent::findByEmail(session()->get('user')[0]["username"]);
+        $student = Student::studentExists($parent["student_no"]);
         return view('request-report')->with("report_no", "RN" . time())
             ->with('parent', $parent)
-            ->with('teachers', Teacher::getAllTeachers());
+            ->with('teacher', Teacher::getNameById($student->student_class_teacher_number));
     }
 
     public function submitRequestReport(Request $request){
 
         if (RequestReport::create($request)) {
             $request->session()->flash('status', 'Your report was submitted successfully!');
-            return redirect('/home');
+            return redirect('/parent/home');
         }
 
         else{
-            return view('request-report')->with('error',  "Sorry, An error occurred");
+            return back()->with('error',  "Sorry, An error occurred");
         }
     }
 }

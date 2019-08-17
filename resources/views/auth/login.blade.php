@@ -9,8 +9,26 @@
                    {{ $user }} Login Screen
 
                 </div>
-                @if(Session::has('message'))
-                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                @if ($message = Session::get('error'))
+
+                    <div class="alert alert-danger alert-block text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+
+                        <strong class="text-center">{{ $message }}</strong>
+
+                    </div>
+                @endif
+
+                @if ($message = Session::get('status'))
+
+                    <div class="alert alert-success alert-block text-center">
+
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+
+                        <strong class="text-center">{{ $message }}</strong>
+
+                    </div>
                 @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route($login) }}">
@@ -73,12 +91,10 @@
                                     </a><br><br>
                                 @endif
 
-                                @if( $user === 'Parent')
                                     First Time User?
                                     <a class="btn btn-sm btn-secondary" href="{{ route($register) }}">
                                         {{ __('Click here?') }}
                                     </a>
-                                @endif
                             </div>
                         </div>
                     </form>

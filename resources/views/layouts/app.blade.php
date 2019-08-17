@@ -40,7 +40,7 @@
                             {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
                         {{--</li>--}}
                     </ul>
-                        <div class="col-md-10" style="font-size: medium">
+                        <div class="col-md-10 text-center" style="font-size: medium">
                            ONLINE STUDENT MONITORING SYSTEM USING FINGERPRINT SCANNER
                         </div>
                     <!-- Right Side Of Navbar -->

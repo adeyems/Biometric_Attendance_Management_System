@@ -31,8 +31,14 @@ Route::post('/login/teacherLogin', 'Auth\LoginController@teacherLogin')->name('t
 Route::get('/register/parent', 'Auth\RegisterController@studentParent')->name('parentRegister');
 
 
+Route::get('/register/teacher', 'Auth\RegisterController@teacher')->name('teacherRegister');
+
+
 //Register Page Routes
 Route::post('/register/createParent', 'Auth\RegisterController@createParent')->name('createParent');
+
+//Register Page Routes
+Route::post('/register/createTeacher', 'Auth\RegisterController@createTeacher')->name('createTeacher');
 
 //Logout
 Route::get('/logout', 'Auth\LogoutController@index')->name('logout');

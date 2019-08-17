@@ -5,35 +5,48 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">{{ __('Parent Registration') }}</div>
+                    <div class="card-header text-center">{{ __('Teacher Registration') }}</div>
 
                     <div class="card-body">
-                        @if ($message = Session::get('error'))
+                        <form method="POST" action="{{ route('createTeacher') }}" id="parent-register">
+                            @if ($message = Session::get('error'))
 
-                            <div class="alert alert-danger alert-block text-center">
+                                <div class="alert alert-danger alert-block text-center">
 
-                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                <strong class="text-center">{{ $message }}</strong>
+                                    <strong class="text-center">{{ $message }}</strong>
 
-                            </div>
-                        @endif
+                                </div>
+                            @endif
 
-                        @if ($message = Session::get('status'))
+                            @if ($message = Session::get('status'))
 
-                            <div class="alert alert-success alert-block text-center">
+                                <div class="alert alert-success alert-block text-center">
 
-                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                <strong class="text-center">{{ $message }}</strong>
+                                    <strong class="text-center">{{ $message }}</strong>
 
-                            </div>
-                        @endif
-                        <form method="POST" action="{{ route('createParent') }}" id="parent-register">
+                                </div>
+                            @endif
                             @csrf
+                            <div class="form-group row" id="signup-form">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Teacher Number') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="teacher_no" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row" id="signup-form">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Parent Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Teacher Name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -47,7 +60,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Parent Surname') }}</label>
+                                <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Teacher Surname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -60,26 +73,42 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row" id="signup-form">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Student No') }}</label>
+                            <div class="form-group row">
+                                <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Class') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="student-no" type="text" class="form-control @error('name') is-invalid @enderror" name="student_no" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    <div id="username-msg"></div>
-                                    @error('name')
+                                    <select  class="form-control @error('class') is-invalid @enderror" name="class" required autocomplete="address">
+                                        <option value="">Select Class</option>
+                                        <option value="Nursery 1">Nursery 1</option>
+                                        <option value="Nursery 2">Nursery 2</option>
+                                        <option value="Primary 1">Primary 1</option>
+                                        <option value="Primary 2">Primary 3</option>
+                                        <option value="Primary 3">Primary 3</option>
+                                        <option value="Primary 4">Primary 4</option>
+                                    </select>
+
+                                    @error('class')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Home Address') }}</label>
+                                <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea  class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address"> {{ old('address') }}</textarea>
+                                    <select  class="form-control @error('class') is-invalid @enderror" name="subject" required autocomplete="address">
+                                        <option value="">Select Subject</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="English">English</option>
+                                        <option value="Social Studies">Social Studies</option>
+                                        <option value="Agricultural Science">Agricultural Science</option>
+                                        <option value="Religious Studies">Religious Studies</option>
+                                    </select>
 
-                                    @error('address')
+                                    @error('class')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -91,7 +120,7 @@
                                 <label for="mobile_no" class="col-md-4 col-form-label text-md-right">{{ __('Mobile No') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile-no" type="number" class="form-control @error('mobile_no') is-invalid @enderror" minlength="14" maxlength="14" name="mobile_no" value="+353" required autocomplete="mobile-no">
+                                    <input id="mobile-no" type="number" class="form-control @error('mobile_no') is-invalid @enderror" minlength="14" maxlength="14" name="mobile_no" value="+353"  required autocomplete="mobile-no">
 
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">

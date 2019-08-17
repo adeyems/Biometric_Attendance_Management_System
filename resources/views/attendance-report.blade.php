@@ -107,8 +107,8 @@
                             </table>
                             <div class="form-group row mb-0">
                                 <div class="col-md-4 offset-md-2">
-                                    <a href="{{ route('teacher-home') }}" class="btn btn-primary">
-                                        {{ __('Next') }}
+                                    <a href="{{ route('student-attendance-report') }}" class="btn btn-primary">
+                                        {{ __('Next Student') }}
                                     </a>
                                 </div>
                                 <div class="col-md-4 offset-md-2">
