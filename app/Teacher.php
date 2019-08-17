@@ -43,7 +43,7 @@ class Teacher extends Model {
         return self::where('teacher_no', $no)->first();
     }
 
-    public static function getNameById(int $teacher_no) {
+    public static function getNameById(string $teacher_no) {
         return self::select('teacher_name', 'teacher_surname')->where('teacher_no', $teacher_no)->first();
     }
 
