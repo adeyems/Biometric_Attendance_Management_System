@@ -16,7 +16,7 @@ class RequestReport extends Model {
      * @var array
      */
 
-    protected $table = 'students_reports';
+    protected $table = 'request_reports';
     protected $primaryKey = 'report_no';
     protected $keyType = 'string';
     public $incrementing = false;

@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\RequestReport;
 use App\Student;
+use App\StudentBiometricInSchoolEntrance;
+use App\StudentBiometricInSchoolExit;
+use App\StudentBiometricOffBusToHome;
+use App\StudentBiometricOffBusToSchool;
+use App\StudentBiometricOnBusToHome;
+use App\StudentBiometricOnBusToSchool;
 use App\StudentParent;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -52,13 +58,43 @@ class ParentController extends Controller
 
     public function submitRequestReport(Request $request){
 
+        $ISEReports = StudentBiometricInSchoolEntrance::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
+        $ISExitReports = StudentBiometricInSchoolExit::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
+        $OBTHReports = StudentBiometricOnBusToHome::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
+        $OBTSReports = StudentBiometricOnBusToSchool::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
+        $OffBTHReports = StudentBiometricOffBusToHome::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
+        $OffBTSReports = StudentBiometricOffBusToSchool::getReport($request->start_date,
+            $request->end_date, $request->student_no);
+
         if (RequestReport::create($request)) {
-            $request->session()->flash('status', 'Your report was submitted successfully!');
-            return redirect('/parent/home');
+            if (!!count($ISEReports) > 0) {
+                $request->session()->flash('status', 'Your report was submitted successfully!');
+
+                return view('parent-home', [
+                    'ISEReports' => $ISEReports,
+                    'ISExitReports' => $ISExitReports,
+                    'OBTHReports' => $OBTHReports,
+                    'OBTSReports' => $OBTSReports,
+                    'OffBTHReports' => $OffBTHReports,
+                    'OffBTSReports' => $OffBTSReports,
+                ]);
+            } else {
+                $request->session()->flash('error', "No report for the selected dates $request->start_date to $request->end_date");
+
+                return view('parent-home');
+            }
         }
 
-        else{
             return back()->with('error',  "Sorry, An error occurred");
-        }
     }
 }

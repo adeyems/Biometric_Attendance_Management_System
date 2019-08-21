@@ -115,7 +115,7 @@ class RegisterController extends Controller
             return redirect('/login/parent');
         }
 
-        else{
+        else {
             return view('auth.register.parent')->with('error',  "Sorry, An error occurred");
         }
     }

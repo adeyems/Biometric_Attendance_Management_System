@@ -18,6 +18,9 @@ class Student extends Model
     protected $table = 'students_biometrics';
     protected $primaryKey = 'student_no';
 
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     protected $fillable = [
         'name', 'surname', 'mobile_no', 'address', 'date_of_birth', 'class', 'password', 'class_teacher_name', 'class_teacher_surname',
     ];
@@ -69,7 +72,17 @@ class Student extends Model
     }
 
     public static function getNameAndNumber(){
-        return self::select('student_no', 'student_name', 'student_surname')->get();
+        return self::select('id', 'student_no', 'student_name', 'student_surname')->get();
+    }
+
+    public static function getNextID($id)
+    {
+        return self::where('id', '>', $id)->min('id');
+    }
+
+    public static function getById($id)
+    {
+        return self::where('id', $id)->first();
     }
 
 }
