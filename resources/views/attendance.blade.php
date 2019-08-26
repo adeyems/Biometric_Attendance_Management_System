@@ -132,11 +132,11 @@
                                         </a>
                                     </div><br>
                                     @endisset
-                                    <div class="col-md-4 offset-md-2">
+                                   {{-- <div class="col-md-4 offset-md-2">
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Get Report') }}
                                         </button>
-                                    </div>
+                                    </div>--}}
                                 </div>
                         </form>
                     </div>

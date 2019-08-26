@@ -2,40 +2,59 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 
 class PasswordReset extends Model
 {
-    use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
     protected $table = 'password_resets';
 
     protected $fillable = [
-        'email', 'token'
+        'userType', 'email'
     ];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'token',
+    ];
 
-    public static function generateAndSaveToken(string $email)
-    {
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
-        $token = sha1(time() . 'ssssssssssssssssssss');
-        $user = new PasswordReset();
-        $user->token = $token;
-        $user->email = $email;
+    public static function create($request) {
+        $password = new PasswordReset();
 
-        $user->save();
+        $password->email = $request->email;
+        $password->userType = $request->userType;
+        $password->token = hash_hmac('sha256', $request->email, $request->userType . time());
 
-        return $token;
+        if ($password->save())
+            return $password->token;
+
+        return false;
 
     }
+
+
+    public static function findByToken(string $token){
+        $user = self::where('token', $token)->where( 'created_at', '>=', Carbon::now()->subHours(2))->first();
+
+        return $user;
+    }
 }
-
-
