@@ -78,4 +78,21 @@ class StudentParent extends Model
     public static function findByEmail(string $email) {
         return StudentParent::where('username', $email)->first();
     }
+
+    public static function getByEmail(string $email){
+        $user = self::where('username', $email)->first();
+        if ($user) {
+            $user->userType = 'parent';
+            return $user;
+        }
+
+        return null;
+    }
+
+    public static function updatePassword($user, $password){
+        $parent = self::where('username', $user->email)->first();
+        $parent->password = sha1($password);
+
+        return $parent->save();
+    }
 }

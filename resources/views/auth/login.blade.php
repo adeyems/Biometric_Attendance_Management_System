@@ -84,12 +84,10 @@
                                     {{ __('Login') }}
                                 </button><br>
 
-                                @if (Route::has('password.request'))
                                     Forgot Your Password?
-                                    <a class="btn btn-sm btn-secondary" href="#">
+                                    <a class="btn btn-sm btn-secondary" href="{{ route('reset-email') }}">
                                          {{ __('Click Here') }}
                                     </a><br><br>
-                                @endif
 
                                     First Time User?
                                     <a class="btn btn-sm btn-secondary" href="{{ route($register) }}">

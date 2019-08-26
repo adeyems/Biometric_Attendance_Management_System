@@ -62,4 +62,20 @@ class Teacher extends Model {
         return $teacher->save();
 
     }
+
+    public static function getByEmail(string $email) {
+        $user = self::where('username', $email)->first();
+        if ($user) {
+            $user->userType = 'teacher';
+            return $user;
+        }
+        return null;
+    }
+
+    public static function updatePassword($user, $password){
+        $teacher = self::where('username', $user->email)->first();
+        $teacher->password = sha1($password);
+
+        return $teacher->save();
+    }
 }

@@ -56,7 +56,7 @@ Route::get('/student/attendance', 'StudentController@attendance')->name('student
 
 Route::post('/student/attendance/daily', 'StudentController@attendanceDailyReport')->name('show-daily-attendance');
 
-Route::post('/student/attendance/daily', 'StudentController@createAttendanceReport')->name('create-attendance-report');
+/*Route::post('/student/attendance/daily', 'StudentController@createAttendanceReport')->name('create-attendance-report');*/
 
 Route::get('/student/attendance/report', 'StudentController@attendanceReport')->name('student-attendance-report');
 
@@ -68,3 +68,12 @@ Route::get('/sms', 'SMSController@sendSMS');
 
 Route::get('show-student-attendance', 'StudentController@AttendanceNext')->name('attendance-report-next');
 
+Route::get('/password/email', 'Auth\ResetPasswordController@viewResetEmail')->name('reset-email');
+
+Route::get('/password/reset-password', 'Auth\ResetPasswordController@viewResetPassword')->name('reset-password');
+
+Route::post('/password/update', 'Auth\ResetPasswordController@UpdatePassword')->name('password.update');
+
+Route::post('/password/reset', 'Auth\ResetPasswordController@sendResetEmail')->name('send-reset-email');
+
+Route::get('/reset/{id}', 'Auth\ResetPasswordController@resetPassword');

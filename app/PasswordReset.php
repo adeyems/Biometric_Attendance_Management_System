@@ -40,9 +40,9 @@ class PasswordReset extends Model
     public static function create($request) {
         $password = new PasswordReset();
 
-        $password->email = $request->email;
+        $password->email = $request->username;
         $password->userType = $request->userType;
-        $password->token = hash_hmac('sha256', $request->email, $request->userType . time());
+        $password->token = hash_hmac('sha256', $request->username, $request->userType . time());
 
         if ($password->save())
             return $password->token;
