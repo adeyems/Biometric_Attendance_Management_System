@@ -34,4 +34,4 @@ class StudentBiometricInSchoolEntrance extends Model
         return self::where('student_no', $studentNo)->where('date', $date)->first();
     }
 }
-l
+

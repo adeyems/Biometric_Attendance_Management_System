@@ -56,7 +56,7 @@ Route::get('/student/attendance', 'StudentController@attendance')->name('student
 
 Route::post('/student/attendance/daily', 'StudentController@attendanceDailyReport')->name('show-daily-attendance');
 
-/*Route::post('/student/attendance/daily', 'StudentController@createAttendanceReport')->name('create-attendance-report');*/
+Route::post('/student/attendance', 'StudentController@createAttendanceReport')->name('create-attendance-report');
 
 Route::get('/student/attendance/report', 'StudentController@attendanceReport')->name('student-attendance-report');
 

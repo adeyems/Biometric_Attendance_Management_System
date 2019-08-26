@@ -38,7 +38,7 @@
                                 <label for="startdate" class="col-md-4 col-form-label text-md-right">{{ __("Report Start Date") }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="start_date" required>
+                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" value="{{$start_date ?? ''}}" name="start_date" required>
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                 <label for="startdate" class="col-md-4 col-form-label text-md-right">{{ __("Report End Date") }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="end_date" required>
+                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" value="{{$end_date ?? ''}}" name="end_date" required>
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -144,11 +144,11 @@
                                 </a>
                             </div><br>
                                 @endisset
-                                {{--<div class="col-md-4 offset-md-2">
+                                <div class="col-md-4 offset-md-2">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Create Report') }}
                                     </button>
-                                </div>--}}
+                                </div>
                             </div>
                         </form>
                     </div>

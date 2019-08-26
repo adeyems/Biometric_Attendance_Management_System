@@ -69,7 +69,7 @@ class StudentController
             return redirect('/');
         }
 
-        $request->date = (date('Y-m-d', strtotime('-20 days')));
+        $request->date = date('Y-m-d');
 
         $students =  Student::getNameAndNumber();
 
@@ -120,7 +120,7 @@ class StudentController
             return redirect('/');
         }
 
-        $request->date = (date('Y-m-d', strtotime('-20 days')));
+        $request->date = date('Y-m-d');
 
         $students =  Student::getNameAndNumber();
 
@@ -173,6 +173,11 @@ class StudentController
             return redirect('/');
         }
 
+        session()->forget('start_date');
+        session()->forget('end_date');
+        session()->push('start_date', $request->start_date);
+        session()->push('end_date', $request->end_date);
+
         $students =  Student::getNameAndNumber();
 
         $id = Student::studentExists($request->student_no)->id;
@@ -210,7 +215,9 @@ class StudentController
                 'OffBTSReports' => $OffBTSReports,
                 'students' => $students,
                 'currentStudentNo' => $request->student_no,
-                'next' => $next
+                'next' => $next,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date
             ]);
 
         } else {
@@ -233,6 +240,10 @@ class StudentController
         $student = Student::getById($id);
 
         $request->student_no = $student->student_no;
+
+        $request->start_date = session()->get('start_date')[0];
+
+        $request->end_date = session()->get('end_date')[0];
 
         $next = Student::where('id', '>', $id)->min('id');
 
@@ -266,7 +277,9 @@ class StudentController
                     'OffBTSReports' => $OffBTSReports,
                     'students' => $students,
                     'currentStudentNo' => $request->student_no,
-                    'next' => $next
+                    'next' => $next,
+                    'start_date' => $request->start_date,
+                    'end_date' => $request->end_date
                 ]);
 
             } else {
