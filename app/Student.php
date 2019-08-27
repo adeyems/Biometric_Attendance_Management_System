@@ -85,4 +85,29 @@ class Student extends Model
         return self::where('id', $id)->first();
     }
 
+    public static function markAttendance($id)
+    {
+
+    }
+
+    public static function getByFingerprint($id, $fingerprintData)
+    {
+        return self::where('id', $id)->where('fingerPrint', $fingerprintData)->first();
+    }
+
+    public static function getAll()
+    {
+        return self::select('id', 'fingerPrint')->where('fingerPrint', '!=' , '')->get();
+    }
+
+    public static function updateFingerprint($id, $fingerprintData)
+    {
+        $student = self::where('id', $id)->where('student_id', '')->first();
+        if ($student) {
+            $student->fingerPrint = $fingerprintData;
+            return $student->save();
+        }
+
+        return false;
+    }
 }

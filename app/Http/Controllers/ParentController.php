@@ -40,7 +40,7 @@ class ParentController extends Controller
             return redirect('/');
         }
 
-        return view('parent-home');
+        return view('parent-home')->with('button', true);
     }
 
     public function requestReport() {
@@ -87,6 +87,7 @@ class ParentController extends Controller
                     'OBTSReports' => $OBTSReports,
                     'OffBTHReports' => $OffBTHReports,
                     'OffBTSReports' => $OffBTSReports,
+                    'button' => false
                 ]);
             } else {
                 $request->session()->flash('error', "No report for the selected dates $request->start_date to $request->end_date");

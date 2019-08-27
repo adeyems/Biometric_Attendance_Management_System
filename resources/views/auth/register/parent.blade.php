@@ -8,15 +8,17 @@
                     <div class="card-header text-center">{{ __('Parent Registration') }}</div>
 
                     <div class="card-body">
-                        @if ($message = Session::get('error'))
+                        @if ($messages = Session::get('error'))
 
-                            <div class="alert alert-danger alert-block text-center">
+                            @foreach($messages as $message)
+                                <div class="alert alert-danger alert-block text-center">
 
-                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                <strong class="text-center">{{ $message }}</strong>
+                                    <strong class="text-center">{{ $message }}</strong>
 
-                            </div>
+                                </div>
+                            @endforeach
                         @endif
 
                         @if ($message = Session::get('status'))
@@ -64,7 +66,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Student No') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="student-no" type="text" class="form-control @error('name') is-invalid @enderror" name="student_no" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="student-no" type="text" class="form-control" name="student_no" value="{{ old('student_no') }}" required autocomplete="name" autofocus>
                                     <div id="username-msg"></div>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -91,7 +93,7 @@
                                 <label for="mobile_no" class="col-md-4 col-form-label text-md-right">{{ __('Mobile No') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile-no" type="number" class="form-control @error('mobile_no') is-invalid @enderror" minlength="14" maxlength="14" name="mobile_no" value="+353" required autocomplete="mobile-no">
+                                    <input id="mobile-no" type="text" class="form-control @error('mobile_no') is-invalid @enderror" minlength="13" maxlength="13" name="mobile_no" value="{{ old('mobile_no') ?? '+353'}}" required autocomplete="mobile-no">
 
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
@@ -152,5 +154,5 @@
         </div>
     </div>
     <script src="{{ asset('js/Easyhttp.js') }}"></script>
-    <script src="{{ asset('js/check-email.js') }}"></script>
+    <script src="{{ asset('js/register.js') }}"></script>
 @endsection

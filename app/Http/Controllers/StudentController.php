@@ -68,14 +68,15 @@ class StudentController
         if ( $role != 'Teacher') {
             return redirect('/');
         }
-
-        $request->date = date('Y-m-d');
+        $request->date = date('Y-m-d', strtotime('-25 days'));
 
         $students =  Student::getNameAndNumber();
 
         $id = Student::studentExists($request->student_no)->id;
 
         $next = Student::where('id', '>', $id)->min('id');
+
+        $previous = Student::where('id', '<', $id)->max('id');
 
         $ISEReport = StudentBiometricInSchoolEntrance::getDailyReport($request->date,$request->student_no);
 
@@ -101,7 +102,8 @@ class StudentController
                 'OffBTSReport' => $OffBTSReport,
                 'students' => $students,
                 'currentStudentNo' => $request->student_no,
-                'next' => $next
+                'next' => $next,
+                'previous' => $previous
             ]);
         }
         else {
@@ -120,7 +122,7 @@ class StudentController
             return redirect('/');
         }
 
-        $request->date = date('Y-m-d');
+        $request->date = date('Y-m-d', strtotime('-25 days'));
 
         $students =  Student::getNameAndNumber();
 
@@ -129,6 +131,8 @@ class StudentController
         $request->student_no = $student->student_no;
 
         $next = Student::where('id', '>', $id)->min('id');
+
+        $previous = Student::where('id', '<', $id)->max('id');
 
         $ISEReport = StudentBiometricInSchoolEntrance::getDailyReport($request->date,$request->student_no);
 
@@ -154,7 +158,8 @@ class StudentController
                 'OffBTSReport' => $OffBTSReport,
                 'students' => $students,
                 'currentStudentNo' => $request->student_no,
-                'next' => $next
+                'next' => $next,
+                'previous' => $previous
             ]);
         }
         else {
@@ -183,6 +188,8 @@ class StudentController
         $id = Student::studentExists($request->student_no)->id;
 
         $next = Student::where('id', '>', $id)->min('id');
+
+        $previous = Student::where('id', '<', $id)->max('id');
 
         $ISEReports = StudentBiometricInSchoolEntrance::getReport($request->start_date,
             $request->end_date, $request->student_no);
@@ -216,6 +223,7 @@ class StudentController
                 'students' => $students,
                 'currentStudentNo' => $request->student_no,
                 'next' => $next,
+                'previous' => $previous,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date
             ]);
@@ -246,6 +254,8 @@ class StudentController
         $request->end_date = session()->get('end_date')[0];
 
         $next = Student::where('id', '>', $id)->min('id');
+
+        $previous = Student::where('id', '<', $id)->max('id');
 
         $ISEReports = StudentBiometricInSchoolEntrance::getReport($request->start_date,
             $request->end_date, $request->student_no);
@@ -278,6 +288,7 @@ class StudentController
                     'students' => $students,
                     'currentStudentNo' => $request->student_no,
                     'next' => $next,
+                    'previous' => $previous,
                     'start_date' => $request->start_date,
                     'end_date' => $request->end_date
                 ]);

@@ -24,7 +24,7 @@
                     @if (session()->get('role')[0] == 'Parent')
                         <div class="col-md-12">
                             <div class="links title m-b-md text-center">
-                                <a href="{{ route('request-report') }}" class="btn btn-primary">Request Student Report</a>
+                                @if($button)<a href="{{ route('request-report') }}" class="btn btn-primary">Request Student Report</a>@endif
                             </div>
                         </div>
                     @endif
@@ -56,6 +56,18 @@
                           </thead>
                           <tbody>
                           <tr>
+                              <th scope="row">{{ __(' Time on bus to school') }}</th>
+                              @foreach($OffBTSReports as $report)
+                                  <td>{{ $report->time ?? 'Absent' }}</td>
+                              @endforeach
+                          </tr>
+                          <tr>
+                              <th scope="row">{{ __(' Time off bus to school') }}</th>
+                              @foreach($OffBTSReports as $report)
+                                  <td>{{ $report->time ?? 'Absent' }}</td>
+                              @endforeach
+                          </tr>
+                          <tr>
                               <th scope="row">{{ __(' Time in school Entrance') }}</th>
                               @foreach($ISEReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
@@ -68,26 +80,14 @@
                               @endforeach
                           </tr>
                           <tr>
-                              <th scope="row">{{ __(' Time on bus to school') }}</th>
-                              @foreach($OffBTSReports as $report)
-                                  <td>{{ $report->time ?? 'Absent' }}</td>
-                              @endforeach
-                          </tr>
-                          <tr>
                               <th scope="row">{{ __(' Time on bus to home') }}</th>
                               @foreach($OffBTHReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
                               @endforeach
                           </tr>
                           <tr>
-                              <th scope="row">{{ __(' Time off bus to school') }}</th>
-                              @foreach($OffBTSReports as $report)
-                                  <td>{{ $report->time ?? 'Absent' }}</td>
-                              @endforeach
-                          </tr>
-                          <tr>
                               <th scope="row">{{ __(' Time off bus to home') }}</th>
-                              @foreach($OffBTHReports as $report)
+                              @foreach($OBTHReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
                               @endforeach
                           </tr>

@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class Api extends Controller
 {
-    //
+    public function storeFingerprint() {
+
+    }
+
 }

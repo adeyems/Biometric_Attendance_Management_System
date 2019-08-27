@@ -88,11 +88,12 @@
                                     <a class="btn btn-sm btn-secondary" href="{{ route('reset-email') }}">
                                          {{ __('Click Here') }}
                                     </a><br><br>
-
+                                    @if($login == 'parentLogin')
                                     First Time User?
                                     <a class="btn btn-sm btn-secondary" href="{{ route($register) }}">
                                         {{ __('Click here?') }}
                                     </a>
+                                    @endif
                             </div>
                         </div>
                     </form>

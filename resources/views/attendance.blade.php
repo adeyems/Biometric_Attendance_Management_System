@@ -8,14 +8,14 @@
                     <div class="card-header text-center">{{ __('Student Daily Attendance') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('show-daily-attendance') }}">
+                        <form method="POST" action="{{ route('show-daily-attendance') }}" id="form">
                             @csrf
 
                             <div class="form-group row" id="signup-form">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Choose Student Name and Surname') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-group form-control" required name="student_no">
+                                    <select class="form-group form-control" required name="student_no" onchange="submit()">
                                         <option value="">Select student name</option>
                                         @foreach($students as $student)
                                             <option value="{{ $student->student_no }}"
@@ -50,26 +50,6 @@
                             </div>
                             @isset ($ISEReport)
                                 <div class="form-group row">
-                                    <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school entrance') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISEReport->time }}" required autocomplete="mobile-no">
-                                        @error('mobile_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                    <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school exit') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISExitReport->time }}" required autocomplete="mobile-no">
-                                        @error('mobile_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time on bus to school') }}</label>
 
                                     <div class="col-md-6">
@@ -84,6 +64,26 @@
 
                                     <div class="col-md-6">
                                         <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OffBTSReport->time }}" required autocomplete="mobile-no">
+                                        @error('mobile_no')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                    <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school entrance') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISEReport->time }}" required autocomplete="mobile-no">
+                                        @error('mobile_no')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                    <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school exit') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISExitReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -111,39 +111,47 @@
                                         @enderror
                                     </div>
                                 </div>
-                                @if($next)
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-4 offset-md-2">
-                                        <a href='{{ route("next-daily-attendance", ["id" => $next]) }}' class="btn btn-primary">
-                                            {{ __('Next Student') }}
-                                        </a>
-                                    </div>
-                                </div><br>
-                                <div class="form-group row mb-0">
+                                <div class="form-group row">
+                                    @if($previous)
+                                        <div class="col-md-4 offset-md-2">
+                                            <a href='{{ route("next-daily-attendance", ["id" => $previous]) }}' class="btn btn-primary">
+                                                {{ __('Previous Student') }}
+                                            </a>
+                                        </div>
                                     @endif
-                                    <div class="col-md-4 offset-md-2">
-                                        <a href="#" class="btn btn-primary">
-                                            {{ __('Print') }}
-                                        </a>
-                                    </div><br><br>
-                                    <div class="col-md-4 offset-md-2">
-                                        <a href="{{ route('teacher-home') }}" class="btn btn-primary">
-                                            {{ __('Back') }}
-                                        </a>
+                                    @if($next)
+                                        <div class="col-md-4 offset-md-2">
+                                            <a href='{{ route("next-daily-attendance", ["id" => $next]) }}' class="btn btn-primary">
+                                                {{ __('Next Student') }}
+                                            </a>
+                                        </div>
+                                    @endif
                                     </div><br>
-                                    @endisset
+                                <div class="form-group row">
+
                                     <div class="col-md-4 offset-md-2">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Get Report') }}
-                                        </button>
+                                    <a href="{{ route('teacher-home') }}" class="btn btn-primary">
+                                        {{ __('Back') }}
+                                    </a>
+                                    </div>
+                                    <div class="col-md-4 offset-md-2">
+                                    <a href="#" class="btn btn-primary" onclick="window.print()">
+                                        {{ __('Print') }}
+                                    </a>
                                     </div>
                                 </div>
+                                    @endisset
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/Easyhttp.js') }}"></script>
-    <script src="{{ asset('js/check-email.js') }}"></script>
+    <script>
+        function submit() {
+            console.log('selected');
+            const form =  document.getElementById('form');
+            form.submit();
+        }
+    </script>
 @endsection

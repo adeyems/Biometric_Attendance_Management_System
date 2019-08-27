@@ -8,7 +8,7 @@
                     <div class="card-header text-center">{{ __('Parent Request for Report') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('create-request-report') }}">
+                        <form method="POST" action="{{ route('create-request-report') }}" id="form" onsubmit="return checkDate();">
                             @csrf
                             <input type="hidden" value="{{$report_no}}" name="report_no" >
                             <div class="form-group row" id="signup-form">
@@ -68,7 +68,7 @@
                                 <label for="startdate" class="col-md-4 col-form-label text-md-right">{{ __('Start Date') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="startdate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="start_date" value="{{ old('email') }}" required autocomplete="mobile-no">
+                                    <input id="start-date" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="start_date" value="{{ old('email') }}" required autocomplete="mobile-no">
 
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
@@ -78,10 +78,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __('End Date ') }}</label>
+                                <label for="end-date" class="col-md-4 col-form-label text-md-right">{{ __('End Date ') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="enddate" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="end_date" value="{{ old('email') }}" required autocomplete="mobile-no">
+                                    <input id="end-date" type="date" max="{{ date('Y-m-d', strtotime('-1 day')) }}" class="form-control @error('mobile_no') is-invalid @enderror" name="end_date" value="{{ old('email') }}" required autocomplete="mobile-no">
                                     @error('mobile_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-6">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" id="submit">
                                         {{ __('Submit') }}
                                     </button>
                                 </div>
@@ -103,6 +103,17 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/Easyhttp.js') }}"></script>
-    <script src="{{ asset('js/check-email.js') }}"></script>
+    <script>
+        function checkDate() {
+            const startDate =  document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            console.log(startDate, endDate);
+
+            if (Date.parse(startDate) >= Date.parse(endDate)){
+                alert('Start date must be greater than end date.');
+                return false;
+            }
+            return true;
+        }
+    </script>
 @endsection

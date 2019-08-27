@@ -77,3 +77,11 @@ Route::post('/password/update', 'Auth\ResetPasswordController@UpdatePassword')->
 Route::post('/password/reset', 'Auth\ResetPasswordController@sendResetEmail')->name('send-reset-email');
 
 Route::get('/reset/{id}', 'Auth\ResetPasswordController@resetPassword');
+
+Route::get('/api/students', 'API\FingerprintController@getAllStudents');
+
+Route::post('/api/fingerprint/match/{id}', 'API\FingerprintController@isFingerPrintMatched');
+
+Route::post('/api/fingerprint/register', 'API\FingerprintController@registerFingerprint');
+
+
