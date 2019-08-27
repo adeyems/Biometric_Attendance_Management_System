@@ -68,7 +68,7 @@ class StudentController
         if ( $role != 'Teacher') {
             return redirect('/');
         }
-        $request->date = date('Y-m-d', strtotime('-25 days'));
+        $request->date = date('Y-m-d');
 
         $students =  Student::getNameAndNumber();
 
@@ -122,7 +122,7 @@ class StudentController
             return redirect('/');
         }
 
-        $request->date = date('Y-m-d', strtotime('-25 days'));
+        $request->date = date('Y-m-d');
 
         $students =  Student::getNameAndNumber();
 
