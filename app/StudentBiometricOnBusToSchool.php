@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Carbon\Traits\Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -32,5 +34,15 @@ class StudentBiometricOnBusToSchool extends Model
     public static function getDailyReport($date, $studentNo)
     {
         return self::where('student_no', $studentNo)->where('date', $date)->first();
+    }
+
+    public function markAttendance($id) {
+        $student_no = Student::getById($id)->student_no;
+        $attendance = new self();
+        $attendance->student_no = $student_no;
+        $attendance->date = date('Y-m-d');
+        $attendance->time = date('h:i A');
+
+       return $attendance->save();
     }
 }

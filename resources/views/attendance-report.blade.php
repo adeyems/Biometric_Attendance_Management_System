@@ -8,6 +8,16 @@
                     <div class="card-header text-center">{{ __('Student Attendance Report') }}</div>
 
                     <div class="card-body">
+                        @if ($message = Session::get('error'))
+
+                            <div class="alert alert-danger alert-block text-center">
+
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                <strong class="text-center">{{ $message }}</strong>
+
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('create-attendance-report') }}"  id="form">
                             @csrf
 

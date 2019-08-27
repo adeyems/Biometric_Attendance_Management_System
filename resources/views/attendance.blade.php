@@ -8,6 +8,16 @@
                     <div class="card-header text-center">{{ __('Student Daily Attendance') }}</div>
 
                     <div class="card-body">
+                        @if ($message = Session::get('error'))
+
+                            <div class="alert alert-danger alert-block text-center">
+
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+
+                                <strong class="text-center">{{ $message }}</strong>
+
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('show-daily-attendance') }}" id="form">
                             @csrf
 
@@ -53,7 +63,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time on bus to school') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OBTSReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate"  disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OBTSReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -63,7 +73,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time off bus to school') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OffBTSReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate"  disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OffBTSReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -73,7 +83,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school entrance') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISEReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate"  disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISEReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -83,7 +93,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time in school exit') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISExitReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate"  disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $ISExitReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,7 +103,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time on bus to home') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OBTHReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate"  disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OBTHReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -103,7 +113,7 @@
                                     <label for="enddate" class="col-md-4 col-form-label text-md-right">{{ __(' Time off bus to home') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="enddate" type="time" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OffBTHReport->time }}" required autocomplete="mobile-no">
+                                        <input id="enddate" type="" disabled class="form-control @error('mobile_no') is-invalid @enderror" name="" value="{{ $OffBTHReport->time }}" required autocomplete="mobile-no">
                                         @error('mobile_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
