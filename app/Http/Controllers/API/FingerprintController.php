@@ -21,7 +21,7 @@ class FingerprintController extends Controller
     public function registerFingerprint(Request $request)
     {
         $id = $request->id;
-        $fingerprintData = $request->fingerprint;
+        $fingerprintData = $request->fingerPrint;
 
         $data = Student::updateFingerprint($id, $fingerprintData);
         return $data ? response()->json(['status' => "success", 'data' => "Registered Successfully."], $this->successStatus) :

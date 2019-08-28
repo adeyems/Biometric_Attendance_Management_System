@@ -110,7 +110,7 @@
             console.log(startDate, endDate);
 
             if (Date.parse(startDate) >= Date.parse(endDate)){
-                alert('Start date must be greater than end date.');
+                alert('Start date must be less than end date.');
                 return false;
             }
             return true;

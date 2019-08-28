@@ -181,7 +181,7 @@
             console.log(startDate, endDate, select);
             if (startDate != '' && endDate != '' && select != '') {
                 if (Date.parse(startDate) >= Date.parse(endDate)){
-                    alert('Start date must be greater than end date.');
+                    alert('Start date must be less than end date.');
                     return false;
                 }
                 form.submit();

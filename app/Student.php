@@ -102,7 +102,7 @@ class Student extends Model
 
     public static function updateFingerprint($id, $fingerprintData)
     {
-        $student = self::where('id', $id)->where('student_id', '')->first();
+        $student = self::where('id', $id)->first();
         if ($student) {
             $student->fingerPrint = $fingerprintData;
             return $student->save();
