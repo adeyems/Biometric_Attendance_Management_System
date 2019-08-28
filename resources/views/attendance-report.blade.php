@@ -8,14 +8,14 @@
                     <div class="card-header text-center">{{ __('Student Attendance Report') }}</div>
 
                     <div class="card-body">
-                        @if ($message = Session::get('error'))
-
-                            <div class="alert alert-danger alert-block text-center">
-
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-
-                                <strong class="text-center">{{ $message }}</strong>
-
+                        @if (session('status'))
+                            <div class="alert alert-success alert-dismissible text-center" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                {{ session('error') }}
                             </div>
                         @endif
                         <form method="POST" action="{{ route('create-attendance-report') }}"  id="form">
@@ -96,7 +96,7 @@
                                         <tbody>
                                         <tr>
                                             <th scope="row">{{ __(' Time on bus to school') }}</th>
-                                            @foreach($OffBTSReports as $report)
+                                            @foreach($OBTSReports as $report)
                                                 <td>{{ $report->time ?? 'Absent' }}</td>
                                             @endforeach
                                         </tr>
@@ -120,7 +120,7 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">{{ __(' Time on bus to home') }}</th>
-                                            @foreach($OffBTHReports as $report)
+                                            @foreach($OBTHReports as $report)
                                                 <td>{{ $report->time ?? 'Absent' }}</td>
                                             @endforeach
                                         </tr>

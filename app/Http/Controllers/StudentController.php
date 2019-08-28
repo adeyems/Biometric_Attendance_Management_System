@@ -16,7 +16,7 @@ use App\StudentBiometricOffBusToHome;
 use App\StudentBiometricOffBusToSchool;
 use App\StudentBiometricOnBusToHome;
 use App\StudentBiometricOnBusToSchool;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 
 class StudentController
 {
@@ -294,7 +294,7 @@ class StudentController
                 ]);
 
             } else {
-                $request->session()->flash('error', "No report for the selected dates $request->start_date to $request->end_date");
+            $request->session()->flash('error', "No report for the selected dates $request->start_date to $request->end_date");
 
                 return view('attendance-report')->with('students', $students);
         }

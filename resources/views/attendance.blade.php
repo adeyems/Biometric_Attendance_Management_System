@@ -8,14 +8,14 @@
                     <div class="card-header text-center">{{ __('Student Daily Attendance') }}</div>
 
                     <div class="card-body">
-                        @if ($message = Session::get('error'))
-
-                            <div class="alert alert-danger alert-block text-center">
-
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-
-                                <strong class="text-center">{{ $message }}</strong>
-
+                        @if (session('status'))
+                            <div class="alert alert-success alert-dismissible text-center" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                {{ session('error') }}
                             </div>
                         @endif
                         <form method="POST" action="{{ route('show-daily-attendance') }}" id="form">

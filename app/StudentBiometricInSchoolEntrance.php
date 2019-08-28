@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\SMSController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,6 +42,8 @@ class StudentBiometricInSchoolEntrance extends Model
         $attendance->date = date('Y-m-d');
         $attendance->time = date('h:i A');
 
+        $parent = StudentParent::findByStudentNo($student_no);
+        SMSController::sendSMS($parent->mobile_no, 'Notification from Christ_light international school. Your child is at the school entrance.');
 
         return $attendance->save();
     }

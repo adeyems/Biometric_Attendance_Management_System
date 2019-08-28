@@ -84,4 +84,7 @@ Route::post('/api/fingerprint/match/{id}', 'API\FingerprintController@isFingerPr
 
 Route::post('/api/fingerprint/register', 'API\FingerprintController@registerFingerprint');
 
+Route::post('/api/send/message', 'API\MSGController@send');
+
+
 

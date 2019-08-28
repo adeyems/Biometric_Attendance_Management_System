@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\SMSController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,6 +41,10 @@ class StudentBiometricOnBusToHome extends Model
         $attendance->student_no = $student_no;
         $attendance->date = date('Y-m-d');
         $attendance->time = date('h:i A');
+
+        $parent = StudentParent::findByStudentNo($student_no);
+        SMSController::sendSMS($parent->mobile_no, 'Notification from Christ_light international school. Your child is on the bus to home.');
+
 
         return $attendance->save();
     }

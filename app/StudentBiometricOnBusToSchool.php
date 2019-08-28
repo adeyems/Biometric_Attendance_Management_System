@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\SMSController;
 use Carbon\Carbon;
 use Carbon\Traits\Date;
 use Illuminate\Database\Eloquent\Model;
@@ -42,6 +43,9 @@ class StudentBiometricOnBusToSchool extends Model
         $attendance->student_no = $student_no;
         $attendance->date = date('Y-m-d');
         $attendance->time = date('h:i A');
+
+        $parent = StudentParent::findByStudentNo($student_no);
+        SMSController::sendSMS($parent->mobile_no, 'Notification from Christ_light international school. Your child is on the bus to school.');
 
        return $attendance->save();
     }
