@@ -94,9 +94,21 @@
                           </tbody>
                         </table>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-md-4 offset-md-2">
+                            <a href="{{ route('parent-home') }}" class="btn btn-primary">
+                                {{ __('Back') }}
+                            </a>
+                        </div>
+                        <div class="col-md-4 offset-md-2">
+                            <a href="#" class="btn btn-primary" onclick="window.print()">
+                                {{ __('Print') }}
+                            </a>
+                        </div>
+                    </div>
+            </div>
                 @endisset
             </div>
         </div>
     </div>
-</div>
 @endsection
