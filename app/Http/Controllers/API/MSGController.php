@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\SMSController;
 use Illuminate\Http\Request;
+use Twilio\Exceptions\ConfigurationException;
+use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
 
 class MSGController extends Controller
@@ -13,7 +16,7 @@ class MSGController extends Controller
      * @throws \Twilio\Exceptions\ConfigurationException
      * @throws \Twilio\Exceptions\TwilioException
      */
-    public static function send(Request $request)
+    public function sendSMS(Request $request)
     {
         // Your Account SID and Auth Token from twilio.com/console
         $sid    = env( 'TWILIO_SID' );
@@ -26,8 +29,27 @@ class MSGController extends Controller
             $request->to,
             [
                 'from' => 'CheckHealth',
-                'body' => "Dear Esugbemi Esulogaju, Abnormal readings have been detected. Please make appointment as soon as possible to visit me.",
+                'body' => $request->body,
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Twilio\Exceptions\ConfigurationException
+     * @throws \Twilio\Exceptions\TwilioException
+     */
+    public function send(Request $request)
+    {
+
+        try {
+            $this->sendSMS($request);
+        } catch (ConfigurationException $e) {
+            return response()->json(["response" => $e->getMessage()], 400);
+        } catch (TwilioException $e) {
+            return response()->json(["response" => $e->getMessage()], 500);
+        }
+        return response()->json(["response" => true], 200);
     }
 }
