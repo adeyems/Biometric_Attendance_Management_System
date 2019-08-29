@@ -35,6 +35,12 @@ class StudentBiometricOffBusToSchool extends Model
         return self::where('student_no', $studentNo)->where('date', $date)->first();
     }
 
+    /**
+     * @param $id
+     * @return bool
+     * @throws \Twilio\Exceptions\ConfigurationException
+     * @throws \Twilio\Exceptions\TwilioException
+     */
     public static function markAttendance($id) {
         $student_no = Student::getById($id)->student_no;
         $attendance = new self();

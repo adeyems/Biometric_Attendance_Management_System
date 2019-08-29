@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Student;
+use App\StudentAttendanceCount;
 use App\StudentBiometricInSchoolEntrance;
 use App\StudentBiometricInSchoolExit;
 use App\StudentBiometricOffBusToHome;
@@ -46,12 +47,15 @@ class FingerprintController extends Controller
     }
 
     private function markAttendance($id) {
-        if (!session()->has('count')) {
-            session(['count' => 0]);
+        $student_no = Student::getById($id)->student_no;
+
+        if (!StudentAttendanceCount::studentExists($student_no)) {
+            StudentAttendanceCount::register($student_no);
+            $this->getStudentCurrentAttendance(0)->markAttendance($id);
         }
-        $count = session()->get('count');
-        if ($this->getStudentCurrentAttendance($count)->markAttendance($id)){
-            session(['count' => ++$count]);
+        else {
+            $count = StudentAttendanceCount::markAttendance($student_no);
+            $this->getStudentCurrentAttendance($count)->markAttendance($id);
         }
     }
 
