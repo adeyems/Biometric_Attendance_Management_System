@@ -3,7 +3,7 @@ const studentNo = document.getElementById("student-no");
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    alert('nn=o')
+    alert('no')
 });
 
 

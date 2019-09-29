@@ -57,7 +57,7 @@
                           <tbody>
                           <tr>
                               <th scope="row">{{ __(' Time on bus to school') }}</th>
-                              @foreach($OffBTSReports as $report)
+                              @foreach($OBTSReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
                               @endforeach
                           </tr>
@@ -81,13 +81,13 @@
                           </tr>
                           <tr>
                               <th scope="row">{{ __(' Time on bus to home') }}</th>
-                              @foreach($OffBTHReports as $report)
+                              @foreach($OBTHReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
                               @endforeach
                           </tr>
                           <tr>
                               <th scope="row">{{ __(' Time off bus to home') }}</th>
-                              @foreach($OBTHReports as $report)
+                              @foreach($OffBTHReports as $report)
                                   <td>{{ $report->time ?? 'Absent' }}</td>
                               @endforeach
                           </tr>

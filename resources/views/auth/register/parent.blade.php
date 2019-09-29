@@ -31,7 +31,7 @@
 
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('createParent') }}" id="parent-register">
+                        <form method="POST" action="{{ route('createParent') }}" id="form" onsubmit="return false">
                             @csrf
 
                             <div class="form-group row" id="signup-form">
@@ -61,7 +61,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group row" id="signup-form">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Student No') }}</label>
 
@@ -79,7 +78,7 @@
                                 <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Home Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea  class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address"> {{ old('address') }}</textarea>
+                                    <textarea  minlength="5" class="form-control @error('address') is-invalid @enderror" name="address" required autocomplete="address"> {{ old('address') }}</textarea>
 
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -106,7 +105,10 @@
                                 <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="username" type="email" placeholder="email" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+                                    <input id="email"
+                                           pattern="(\W|^)[\w.+\-]*@(gmail|yahoo|hotmail|outlook)\.com(\W|$)"
+                                           title="Emails accepted are gmail.com, yahoo.com, outlook.com and hotmail.com"
+                                           type="email" placeholder="email" class="form-control @error('email') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -120,7 +122,10 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <input id="password" type="password"
+                                           title="Password should contain at least an uppercase letter, a lower case letter, a number, a special character and a minimum length of 8"
+                                           pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                           class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" minlength="8">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -129,13 +134,11 @@
                                     @enderror
                                 </div>
                             </div>
-
-
                             <div class="form-group row">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Retype Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="confirm-password" minlength="8" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                                 <div id="password-msg"></div>
                             </div>
@@ -153,6 +156,4 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/Easyhttp.js') }}"></script>
-    <script src="{{ asset('js/register.js') }}"></script>
 @endsection
