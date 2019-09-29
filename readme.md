@@ -10,5 +10,5 @@ It sends an SMS on attendance to parents on attendance :
 3. When the student enters the class
 4. When the students leaves the class
 5. when the student enters the bus on departure to home
-6. When the students leaves the bus to home. 
+6. When the students leaves the bus to home
 
